@@ -9,25 +9,20 @@ public abstract class Vehicle {
     private Engine engine;
     private String color;
     private boolean isUsed;
-    private boolean isOn;
+    public boolean isOn = false;
 
-    public Vehicle(String make, int maxPassengers, int year, Engine engine, String color, boolean isUsed, boolean isOn) {
+    public Vehicle(String make, int maxPassengers, int year, Engine engine, String color, boolean isUsed) {
         this.make = make;
         this.maxPassengers = maxPassengers;
         this.year = year;
         this.engine = engine;
         this.color = color;
         this.isUsed = isUsed;
-        this.isOn = isOn;
     }
 
-    public void turnOn() {
-        isOn = true;
-    }
+    public abstract void turnOn();
 
-    public void turnOff() {
-        isOn = false;
-    }
+    public abstract void turnOff();
 
     public void addPassenger(String name) {
         passengers.add(name);

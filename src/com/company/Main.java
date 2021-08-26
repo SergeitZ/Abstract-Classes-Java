@@ -24,7 +24,7 @@ public class Main {
 //        whiskers.displayWeightInPounds();
 //        whiskers.meow();
 
-        Car hondaCivic = new Car("Honda", 5, 2007, new MidSizeEngine("Honda", 2500), "Black", true, false);
+        Car hondaCivic = new Car("Honda", 5, 2007, new MidSizeEngine("Honda", 2500), "Black", true);
 
         hondaCivic.addPassenger("Sergio");
 
