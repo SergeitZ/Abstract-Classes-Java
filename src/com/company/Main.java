@@ -19,10 +19,15 @@ public class Main {
     At least two Abstract Methods
     */
 
-        HouseCat whiskers = new HouseCat("Whiskers", "Red", 2_500, true, "Scottish fold");
+//        HouseCat whiskers = new HouseCat("Whiskers", "Red", 2_500, true, "Scottish fold");
+//
+//        whiskers.displayWeightInPounds();
+//        whiskers.meow();
 
-        whiskers.displayWeightInPounds();
-        whiskers.meow();
+        Car hondaCivic = new Car("Honda", 5, 2007, new MidSizeEngine("Honda", false, 2500), "Black", true);
 
+        hondaCivic.addPassenger("Sergio");
+
+        System.out.println(hondaCivic);
     }
 }
