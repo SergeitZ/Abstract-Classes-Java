@@ -7,12 +7,12 @@ public class Car extends Vehicle {
     }
 
     @Override
-    public void turnOn () {
+    public void turnOn() {
         isOn = true;
     }
 
     @Override
-    public void turnOff () {
+    public void turnOff() {
         isOn = false;
     }
 
