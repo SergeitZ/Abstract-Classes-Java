@@ -5,19 +5,18 @@ public abstract class Vehicle {
     private String make;
     private final List<String> passengers = new ArrayList<>();
     private int maxPassengers;
-    private int year;
     private Engine engine;
     private String color;
-    private boolean isUsed;
-    public boolean isOn = false;
+    private int weightTons;
+    public boolean isOn = true;
 
-    public Vehicle(String make, int maxPassengers, int year, Engine engine, String color, boolean isUsed) {
+    public Vehicle(String make, int maxPassengers, Engine engine, String color, int weight) {
         this.make = make;
         this.maxPassengers = maxPassengers;
-        this.year = year;
         this.engine = engine;
         this.color = color;
-        this.isUsed = isUsed;
+        this.weightTons = weight;
+
     }
 
     public abstract void turnOn();
@@ -42,18 +41,9 @@ public abstract class Vehicle {
         return status;
     }
 
-    public String getUsedStatus() {
-        String answer;
-        if (isUsed) {
-            answer = "Yes";
-        } else {
-            answer = "No";
-        }
-        return answer;
-    }
 
     public String toString() {
-        String output = "Make: " + make + "\nYear: " + year  + "\nColor: "  + color + "\nPre-Owned: " + getUsedStatus()+ "\nEngine status: " + getIsOn() + "\nEngine: " + engine; ;
+        String output = "Make: " + make + "\nColor: "  + color + "\nWeight: " + weightTons + " tons\nEngine status: " + getIsOn() + "\nEngine: " + engine; ;
         return output;
     }
 
