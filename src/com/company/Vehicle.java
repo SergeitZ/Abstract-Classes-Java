@@ -9,6 +9,7 @@ public abstract class Vehicle {
     private String color;
     private int weightTons;
     public boolean isOn = true;
+    public int speed;
 
     public Vehicle(String make, int maxPassengers, Engine engine, String color, int weight) {
         this.make = make;
@@ -16,6 +17,7 @@ public abstract class Vehicle {
         this.engine = engine;
         this.color = color;
         this.weightTons = weight;
+        speed = 0;
 
     }
 

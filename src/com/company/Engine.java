@@ -1,15 +1,15 @@
 package com.company;
 
 public abstract class Engine {
-    private String manufacturer;
+    private String type;
     private int horsePower;
 
-    public Engine (String manufacturer, int horsePower) {
-        this.manufacturer = manufacturer;
+    public Engine (String type, int horsePower) {
+        this.type = type;
         this.horsePower = horsePower;
     }
 
     public String toString() {
-        return "\n\tManufacturer: " + manufacturer + "\n\tHorse Power: " + horsePower;
+        return "\n\tType: " + type + "\n\tHorse Power: " + horsePower;
     }
 }

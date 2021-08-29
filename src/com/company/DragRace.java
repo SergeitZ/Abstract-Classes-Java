@@ -10,9 +10,10 @@ public class DragRace {
     public static final String TEXT_GREEN = "\u001B[32m";
     public static final String TEXT_ORANGE = "\033[38;5;166m";
     public static Car[] cars = {
-            new Car("Honda", 5, new MidSizeEngine("Honda", 800), "Black", 3),
-            new Car("Mitsubishi", 2, new MidSizeEngine("Mitsubishi", 900), "White", 2)
+            new Car("Honda", 5, new CarEngine("Standard", 600), "Black", 3),
+            new Car("Mitsubishi", 2, new CarEngine("Performance", 900), "White", 2)
     };
+    public static Car selectedVehicle;
 
     public void run() {
         System.out.println("Welcome to " + TEXT_RED + "Drag Race!" + TEXT_RESET);
@@ -29,26 +30,26 @@ public class DragRace {
                 case "1" -> vehicleSelection();
             }
         } while (!selection.equals("E"));
-        System.out.println("Thank you!");
+        System.out.println("Bye!");
     }
-    //TODO: get index number in line 27
-    public void vehicleSelection() {
-        for (int i = 0; i < cars.length; i++) {
-            System.out.println("\t\n" + cars[i]);
-        }
 
-        System.out.println("\t1 - " + cars[0] + "\n" + "\n\t2 - " + cars[1]);
+    public void vehicleSelection() {
+        System.out.println("Choose an option: ");
+        for (int i = 0; i < cars.length; i++) {
+            System.out.println("\t\n" + (i + 1) + " - " + cars[i]);
+        }
         String selection;
         do {
             System.out.println("""
                     Choose an option:
-                    (1) Honda Civic (Mid-Size Engine)
-                    (2) Mitsubishi (Large engine)
+                    (1) Honda Civic (Engine: Standard)
+                    (2) Mitsubishi (Engine: Performance)
+                    (E) Back to Main menu
                     Selection:\s""");
             selection = scanner.nextLine().toUpperCase(Locale.ROOT);
             switch (selection) {
-                case "1" -> System.out.println("1");
-                case "2" -> System.out.println("2");
+                case "1" -> selectedVehicle = cars[0];
+                case "2" -> selectedVehicle = cars[1];
             }
         } while (!selection.equals("E"));
     }
