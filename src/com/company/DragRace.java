@@ -18,7 +18,6 @@ public class DragRace {
     public void run() {
         System.out.println("Welcome to " + TEXT_RED + "Drag Race!" + TEXT_RESET);
         String selection;
-        System.out.println("Distance remaining: " + TEXT_ORANGE + METERS_DISTANCE + TEXT_RESET + " meters.");
         do {
             System.out.println("""
                     Choose an option:
@@ -44,13 +43,43 @@ public class DragRace {
                     Choose an option:
                     (1) Honda Civic (Engine: Standard)
                     (2) Mitsubishi (Engine: Performance)
-                    (E) Back to Main menu
                     Selection:\s""");
             selection = scanner.nextLine().toUpperCase(Locale.ROOT);
             switch (selection) {
                 case "1" -> selectedVehicle = cars[0];
                 case "2" -> selectedVehicle = cars[1];
             }
-        } while (!selection.equals("E"));
+        } while (!selection.equals("1") && !selection.equals("2"));
+        raceInterface();
+    }
+
+    //Turn represents a minute of time passing
+    public void raceInterface() {
+        String selection;
+        int turns = 0;
+        System.out.println("Distance remaining: " + TEXT_ORANGE + METERS_DISTANCE + TEXT_RESET + " meters.");
+        System.out.println(selectedVehicle);
+        do {
+            System.out.println("\nTime elapsed: " + turns + " Minutes " +
+                    "| Vehicle speed: " + selectedVehicle.speed + " Mph " +
+                    "| Distance Travelled: " + selectedVehicle.distanceTravelled);
+            System.out.println("""
+                    Choose an option:
+                    (1) Accelerate
+                    (2) Coast
+                    (3) Brake
+                    Selection:\s""");
+            selection = scanner.nextLine().toUpperCase(Locale.ROOT);
+            switch (selection) {
+                case "1" -> accelerate();
+                case "2" -> System.out.println("turns");
+            }
+            turns++;
+        } while (turns != 10);
+    }
+
+    public void accelerate () {
+        selectedVehicle.speed += selectedVehicle.getEngine().getHorsePower() * 0.025;
+        selectedVehicle.distanceTravelled = (int) (selectedVehicle.speed / 60.0 * 1609);
     }
 }

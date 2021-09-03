@@ -10,6 +10,7 @@ public abstract class Vehicle {
     private int weightTons;
     public boolean isOn = true;
     public int speed;
+    public int distanceTravelled;
 
     public Vehicle(String make, int maxPassengers, Engine engine, String color, int weight) {
         this.make = make;
@@ -18,7 +19,12 @@ public abstract class Vehicle {
         this.color = color;
         this.weightTons = weight;
         speed = 0;
+        distanceTravelled = 0;
 
+    }
+
+    public Engine getEngine() {
+        return engine;
     }
 
     public abstract void turnOn();
@@ -43,10 +49,13 @@ public abstract class Vehicle {
         return status;
     }
 
-
     public String toString() {
-        String output = "Make: " + make + "\nColor: "  + color + "\nWeight: " + weightTons + " tons\nEngine status: " + getIsOn() + "\nEngine: " + engine; ;
-        return output;
+        return "Make: " + make + " | Weight: " + weightTons + " tons " + "| \n\tEngine: " + engine;
     }
+
+//    public String toString() {
+//        String output = "Make: " + make + "\nColor: "  + color + "\nWeight: " + weightTons + " tons\nEngine status: " + getIsOn() + "\nEngine: " + engine; ;
+//        return output;
+//    }
 
 }
