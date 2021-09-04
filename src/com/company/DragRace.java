@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class DragRace {
     Scanner scanner = new Scanner(System.in);
-    public final int METERS_DISTANCE = 1000;
+    public final int METERS_DISTANCE = 2000;
     public static final String TEXT_RESET = "\u001B[0m";
     public static final String TEXT_RED = "\u001B[31m";
     public static final String TEXT_GREEN = "\u001B[32m";
@@ -28,7 +28,7 @@ public class DragRace {
             selection = scanner.nextLine().toUpperCase(Locale.ROOT);
             switch (selection) {
                 case "1" -> vehicleSelection();
-            }
+             }
         } while (!selection.equals("E"));
         System.out.println("Bye!");
     }
@@ -55,7 +55,7 @@ public class DragRace {
     }
 
     public void travelDistance() {
-        selectedVehicle.distanceTravelled = (int) (vehicleSpeed / 60.0 * 1609);
+        selectedVehicle.distanceTravelled += (int) (vehicleSpeed / 60.0 * 1609);
     }
 
     public void raceInterface() {
@@ -64,23 +64,27 @@ public class DragRace {
         System.out.println("Distance remaining: " + TEXT_ORANGE + METERS_DISTANCE + TEXT_RESET + " meters.");
         System.out.println(selectedVehicle);
         do {
+            travelDistance();
             System.out.println("\nTime elapsed: " + turns + " Minutes " +
                     "| Vehicle speed: " + vehicleSpeed + " Mph " +
-                    "| Distance Travelled: " + selectedVehicle.distanceTravelled);
+                    "| Distance Travelled: " + selectedVehicle.distanceTravelled + " meters" +
+                    "| Distance remaining: " + TEXT_ORANGE + (METERS_DISTANCE - selectedVehicle.distanceTravelled)
+                    + TEXT_RESET + " meters.");
             System.out.println("""
                     Choose an option:
                     (1) Accelerate
                     (2) Coast
                     (3) Brake
+                    (4) Abort (Return to main menu)
                     Selection:\s""");
             selection = scanner.nextLine().toUpperCase(Locale.ROOT);
             switch (selection) {
-                case "1" -> {
-                    accelerate();
-                    travelDistance();
-                }
-                case "2" -> System.out.println("turns");
+                case "1" -> accelerate();
+                case "2" -> coast();
+                case "3" -> System.out.println("wip");
+                case "4" -> System.out.println("wip2");
             }
+
             turns++;
         } while (turns != 10);
     }
@@ -90,6 +94,6 @@ public class DragRace {
     }
 
     public void coast() {
-
+        vehicleSpeed = vehicleSpeed - selectedVehicle.getWeightTons();
     }
 }
