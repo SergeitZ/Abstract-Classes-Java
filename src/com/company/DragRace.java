@@ -14,6 +14,7 @@ public class DragRace {
             new Car("Mitsubishi", 2, new CarEngine("Performance", 900), "White", 2)
     };
     public static Car selectedVehicle;
+    public int vehicleSpeed = 0;
 
     public void run() {
         System.out.println("Welcome to " + TEXT_RED + "Drag Race!" + TEXT_RESET);
@@ -53,7 +54,10 @@ public class DragRace {
         raceInterface();
     }
 
-    //Turn represents a minute of time passing
+    public void travelDistance() {
+        selectedVehicle.distanceTravelled = (int) (vehicleSpeed / 60.0 * 1609);
+    }
+
     public void raceInterface() {
         String selection;
         int turns = 0;
@@ -61,7 +65,7 @@ public class DragRace {
         System.out.println(selectedVehicle);
         do {
             System.out.println("\nTime elapsed: " + turns + " Minutes " +
-                    "| Vehicle speed: " + selectedVehicle.speed + " Mph " +
+                    "| Vehicle speed: " + vehicleSpeed + " Mph " +
                     "| Distance Travelled: " + selectedVehicle.distanceTravelled);
             System.out.println("""
                     Choose an option:
@@ -71,15 +75,21 @@ public class DragRace {
                     Selection:\s""");
             selection = scanner.nextLine().toUpperCase(Locale.ROOT);
             switch (selection) {
-                case "1" -> accelerate();
+                case "1" -> {
+                    accelerate();
+                    travelDistance();
+                }
                 case "2" -> System.out.println("turns");
             }
             turns++;
         } while (turns != 10);
     }
 
-    public void accelerate () {
-        selectedVehicle.speed += selectedVehicle.getEngine().getHorsePower() * 0.025;
-        selectedVehicle.distanceTravelled = (int) (selectedVehicle.speed / 60.0 * 1609);
+    public void accelerate() {
+        vehicleSpeed += selectedVehicle.getEngine().getHorsePower() * 0.025;
+    }
+
+    public void coast() {
+
     }
 }
