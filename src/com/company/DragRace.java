@@ -81,10 +81,9 @@ public class DragRace {
             switch (selection) {
                 case "1" -> accelerate();
                 case "2" -> coast();
-                case "3" -> System.out.println("wip");
-                case "4" -> System.out.println("wip2");
+                case "3" -> brake();
+                case "4" -> System.exit(0);
             }
-
             turns++;
         } while (turns != 10);
     }
@@ -95,5 +94,9 @@ public class DragRace {
 
     public void coast() {
         vehicleSpeed = vehicleSpeed - selectedVehicle.getWeightTons();
+    }
+
+    public void brake() {
+        vehicleSpeed -= vehicleSpeed * 0.70;
     }
 }
