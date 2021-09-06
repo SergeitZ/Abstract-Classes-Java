@@ -25,6 +25,10 @@ public abstract class Vehicle {
         return engine;
     }
 
+    public void installEngine(Engine engine) {
+        this.engine = engine;
+    }
+
     public int getWeightTons() {
         return weightTons;
     }

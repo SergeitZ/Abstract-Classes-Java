@@ -10,7 +10,7 @@ public abstract class Engine {
     }
 
     public String toString() {
-        return "\n\tType: " + type + "\n\tHorse Power: " + horsePower;
+        return "Type: " + type + "\n\tHorse Power: " + horsePower;
     }
 
     public int getHorsePower() {

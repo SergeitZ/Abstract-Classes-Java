@@ -5,19 +5,21 @@ import java.util.Scanner;
 public class DragRace {
     Scanner scanner = new Scanner(System.in);
     public final int METERS_DISTANCE = 2000;
-    public static final String TEXT_RESET = "\u001B[0m";
-    public static final String TEXT_RED = "\u001B[31m";
-    public static final String TEXT_GREEN = "\u001B[32m";
-    public static final String TEXT_ORANGE = "\033[38;5;166m";
     public static Car[] cars = {
-            new Car("Honda", 5, new CarEngine("Standard", 600), "Black", 3),
-            new Car("Mitsubishi", 2, new CarEngine("Performance", 900), "White", 2)
+            new Car("Honda", 5, null, "Black", 3),
+            new Car("Mitsubishi", 2, null, "White", 2)
     };
+
+    public static Engine[] engines = {
+            new CarEngine("Standard", 600),
+            new CarEngine("Performance", 900)
+    };
+
     public static Car selectedVehicle;
     public int vehicleSpeed = 0;
 
     public void run() {
-        System.out.println("Welcome to " + TEXT_RED + "Drag Race!" + TEXT_RESET);
+        System.out.println("Welcome to " + Color.RED + "Drag Race!" + Color.RESET);
         String selection;
         do {
             System.out.println("""
@@ -34,14 +36,14 @@ public class DragRace {
     }
 
     public void vehicleSelection() {
-        System.out.println("Choose an option: ");
+        System.out.println("Select vehicle: ");
         for (int i = 0; i < cars.length; i++) {
             System.out.println("\t\n" + (i + 1) + " - " + cars[i]);
         }
         String selection;
         do {
             System.out.println("""
-                    Choose an option:
+                    Select vehicle:
                     (1) Honda Civic (Engine: Standard)
                     (2) Mitsubishi (Engine: Performance)
                     Selection:\s""");
@@ -49,6 +51,27 @@ public class DragRace {
             switch (selection) {
                 case "1" -> selectedVehicle = cars[0];
                 case "2" -> selectedVehicle = cars[1];
+            }
+        } while (!selection.equals("1") && !selection.equals("2"));
+        selectEngine();
+    }
+
+    public void selectEngine() {
+        System.out.println("Select engine: ");
+        for (int i = 0; i < engines.length; i++) {
+            System.out.println("\t\n" + (i + 1) + " - " + engines[i]);
+        }
+        String selection;
+        do {
+            System.out.println("""
+                    Select engine:
+                    (1) Standard Engine: 600 HP
+                    (2) Performance Engine: 900 HP
+                    Selection:\s""");
+            selection = scanner.nextLine().toUpperCase(Locale.ROOT);
+            switch (selection) {
+                case "1" -> selectedVehicle.installEngine(engines[0]);
+                case "2" -> selectedVehicle.installEngine(engines[1]);
             }
         } while (!selection.equals("1") && !selection.equals("2"));
         raceInterface();
@@ -61,15 +84,15 @@ public class DragRace {
     public void raceInterface() {
         String selection;
         int turns = 0;
-        System.out.println("Distance remaining: " + TEXT_ORANGE + METERS_DISTANCE + TEXT_RESET + " meters.");
+        System.out.println("Distance remaining: " + Color.ORANGE + METERS_DISTANCE + Color.RESET + " meters.");
         System.out.println(selectedVehicle);
         do {
             travelDistance();
             System.out.println("\nTime elapsed: " + turns + " Minutes " +
                     "| Vehicle speed: " + vehicleSpeed + " Mph " +
                     "| Distance Travelled: " + selectedVehicle.distanceTravelled + " meters" +
-                    "| Distance remaining: " + TEXT_ORANGE + (METERS_DISTANCE - selectedVehicle.distanceTravelled)
-                    + TEXT_RESET + " meters.");
+                    "| Distance remaining: " + Color.ORANGE + (METERS_DISTANCE - selectedVehicle.distanceTravelled)
+                    + Color.RESET + " meters.");
             System.out.println("""
                     Choose an option:
                     (1) Accelerate
