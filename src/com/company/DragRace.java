@@ -4,15 +4,18 @@ import java.util.Scanner;
 
 public class DragRace {
     Scanner scanner = new Scanner(System.in);
-    public final int METERS_DISTANCE = 2000;
+    public final int METERS_DISTANCE = 5000;
     public static Car[] cars = {
-            new Car("Honda", 5, null, "Black", 3),
-            new Car("Mitsubishi", 2, null, "White", 2)
+            new Car("Honda", 5, null, "Black", 4),
+            new Car("Mitsubishi", 2, null, "White", 2),
+            new Car("Nissan", 2, null, "White", 3)
     };
-
+    //TODO: Code ending, once you reach the finish line
+    //TODO: Interface
     public static Engine[] engines = {
             new CarEngine("Standard", 600),
-            new CarEngine("Performance", 900)
+            new CarEngine("Performance", 900),
+            new CarEngine("Alien-Tech", 2500)
     };
 
     public static Car selectedVehicle;
@@ -44,15 +47,19 @@ public class DragRace {
         do {
             System.out.println("""
                     Select vehicle:
-                    (1) Honda Civic (Engine: Standard)
-                    (2) Mitsubishi (Engine: Performance)
+                    (1) Honda Civic
+                    (2) Mitsubishi Evo
+                    (3) Nissan Skyline
                     Selection:\s""");
             selection = scanner.nextLine().toUpperCase(Locale.ROOT);
             switch (selection) {
                 case "1" -> selectedVehicle = cars[0];
                 case "2" -> selectedVehicle = cars[1];
+                case "3" -> selectedVehicle = cars[2];
             }
-        } while (!selection.equals("1") && !selection.equals("2"));
+        } while (!selection.equals("1") &&
+                 !selection.equals("2") &&
+                 !selection.equals("3"));
         selectEngine();
     }
 
@@ -67,13 +74,17 @@ public class DragRace {
                     Select engine:
                     (1) Standard Engine: 600 HP
                     (2) Performance Engine: 900 HP
+                    (3) Alien tech Engine: 2500 HP
                     Selection:\s""");
             selection = scanner.nextLine().toUpperCase(Locale.ROOT);
             switch (selection) {
                 case "1" -> selectedVehicle.installEngine(engines[0]);
                 case "2" -> selectedVehicle.installEngine(engines[1]);
+                case "3" -> selectedVehicle.installEngine(engines[2]);
             }
-        } while (!selection.equals("1") && !selection.equals("2"));
+        } while (!selection.equals("1") &&
+                 !selection.equals("2") &&
+                 !selection.equals("3"));
         raceInterface();
     }
 
@@ -98,14 +109,18 @@ public class DragRace {
                     (1) Accelerate
                     (2) Coast
                     (3) Brake
-                    (4) Abort (Return to main menu)
+                    (4) Restart race
                     Selection:\s""");
             selection = scanner.nextLine().toUpperCase(Locale.ROOT);
             switch (selection) {
                 case "1" -> accelerate();
                 case "2" -> coast();
                 case "3" -> brake();
-                case "4" -> System.exit(0);
+                case "4" -> {
+                    selectedVehicle.distanceTravelled = 0;
+                    vehicleSpeed = 0;
+                    raceInterface();
+                }
             }
             turns++;
         } while (turns != 10);
