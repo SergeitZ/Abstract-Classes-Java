@@ -10,7 +10,7 @@ public class DragRace {
             new Car("Mitsubishi", 2, null, "White", 2),
             new Car("Nissan", 2, null, "White", 3)
     };
-    //TODO: Code ending, once you reach the finish line
+
     //TODO: Interface
     public static Engine[] engines = {
             new CarEngine("Standard", 600),
@@ -28,14 +28,16 @@ public class DragRace {
             System.out.println("""
                     Choose an option:
                     (1) Select vehicle
+                    (2) Change video settings
                     (E) Exit
                     Selection:\s""");
             selection = scanner.nextLine().toUpperCase(Locale.ROOT);
             switch (selection) {
                 case "1" -> vehicleSelection();
+                case "2" -> System.out.println(Color.MAGENTA_BOLD_BRIGHT +  "\n¯\\_( ͡° ͜ʖ ͡°)_/¯\n" + Color.RESET);
              }
         } while (!selection.equals("E"));
-        System.out.println("Bye!");
+        System.out.println(Color.BLUE_BOLD_BRIGHT + "Thank you for playing!" + Color.RESET);
     }
 
     public void vehicleSelection() {
@@ -123,7 +125,14 @@ public class DragRace {
                 }
             }
             turns++;
-        } while (turns != 10);
+        } while (turns != 10 && selectedVehicle.distanceTravelled < 5000);
+        if (selectedVehicle.distanceTravelled > 5000 && selectedVehicle.distanceTravelled < 5500) {
+            System.out.println(Color.GREEN + "\nReached finish line\n" + Color.RESET);
+        } else if (selectedVehicle.distanceTravelled > 5500) {
+            System.out.println(Color.RED + "\nOvershot distance by considerable margin\n" + Color.RESET);
+        } else {
+            System.out.println(Color.RED + "\nMinimum distance NOT reached\n" + Color.RESET);
+        }
     }
 
     public void accelerate() {
